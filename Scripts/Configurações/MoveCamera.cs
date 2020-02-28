@@ -32,6 +32,12 @@ public class MoveCamera : MonoBehaviour
 				transform.position = new Vector3(novaCamPos.x, 14.6f, transform.position.z);
 				ultimaAlvoPos = player.transform.position;
 			}
+			else if(player.transform.position.x<=transform.position.x && player.transform.position.x>= -78.5241)
+			{
+				Vector3 novaCamPos = Vector3.SmoothDamp(transform.position, player.transform.position, ref velAtual, -camVel);
+				transform.position = new Vector3(novaCamPos.x, 14.6f, transform.position.z);
+				ultimaAlvoPos = player.transform.position;
+			}
 			
 		}
 

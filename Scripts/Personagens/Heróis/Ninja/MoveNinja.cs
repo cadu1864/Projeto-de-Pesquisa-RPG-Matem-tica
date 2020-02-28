@@ -40,7 +40,7 @@ public class MoveNinja : MonoBehaviour
         }
         animacao.SetBool("idle", false);
         animacao.SetBool("run", true);
-        velocidade = 25*Time.deltaTime;
+        velocidade = 20*Time.deltaTime;
         
 
     }
@@ -53,7 +53,7 @@ public class MoveNinja : MonoBehaviour
         }
         animacao.SetBool("idle", false);
         animacao.SetBool("run", true);
-        velocidade = -25*Time.deltaTime;
+        velocidade = -20*Time.deltaTime;
         
 
     }
