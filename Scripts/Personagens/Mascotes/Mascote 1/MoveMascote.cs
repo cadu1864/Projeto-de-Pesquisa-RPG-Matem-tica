@@ -56,16 +56,17 @@ public class MoveMascote : MonoBehaviour
 
     void Mover()
     {
-        if (liberaPersonagem == true && distancia > 10f)
+        bool HeroiPulando = heroi.GetComponent<MoveNinja>().pulando;
+        if (liberaPersonagem == true && distancia > 20f && !HeroiPulando)
         {
-            velocidade = 30f;
+            velocidade = 20f;
             animacao.SetBool("idle", false);
             animacao.SetBool("run", true);
-            if (heroi.transform.position.x < this.transform.position.x)
+            if (heroi.transform.position.x < this.transform.position.x && distancia > 10f)
             {
                 transform.Translate(new Vector2(-velocidade * Time.deltaTime, 0));
             }
-            else if (heroi.transform.position.x > this.transform.position.x)
+            else if (heroi.transform.position.x > this.transform.position.x && distancia > 10f)
             {
                 transform.Translate(new Vector2(velocidade * Time.deltaTime, 0));
             }

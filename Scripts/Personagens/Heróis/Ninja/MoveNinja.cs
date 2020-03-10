@@ -3,14 +3,30 @@
 public class MoveNinja : MonoBehaviour
 {
     public Transform heroiT;
+    //public Transform esqueleto;
     public bool face = true;
     public Vector3 escala;
     public Animator animacao;
     public float velocidade = 0;
     public float forca = 350f;
     public Rigidbody2D heroi;
+
     public bool liberaPulo = false;
+    public Transform check;
+    public LayerMask chao;
+    public float raio = 0.2f; 
     public int unico = 1;
+
+
+    public bool liberaAtaque = false;
+    public bool atacando = false;
+    public bool pulando = false;
+
+    public int contadorAtaque = 0;
+
+    public bool vivo = true;
+    public int vidaNinja = 10;
+
 
 
     // Start is called before the first frame update
@@ -20,16 +36,17 @@ public class MoveNinja : MonoBehaviour
         animacao = GetComponent<Animator>();
         heroi = GetComponent<Rigidbody2D>();
 
-
     }
 
     // Update is called once per frame
     void Update()
     {
-        escala = heroiT.localScale;
-
-        Mover();
-
+        if (vivo == true)
+        {
+            escala = heroiT.localScale;
+            Mover();
+            liberaPulo = Physics2D.OverlapCircle(check.position, raio, chao);
+        }
     }
 
     public void MoveDireita()
@@ -86,19 +103,41 @@ public class MoveNinja : MonoBehaviour
         if (outro.gameObject.CompareTag("chao") || outro.gameObject.CompareTag("caixa"))
         {
             unico = 1;
-            liberaPulo = true;
+            pulando = false;
         }
     }
-
-
 
     void OnCollisionExit2D(Collision2D outro)
     {
         if (outro.gameObject.CompareTag("chao") || outro.gameObject.CompareTag("caixa"))
         {
-            liberaPulo = false;
+            unico = 1;
+            pulando = true;
         }
     }
+
+    private void OnTriggerEnter2D(Collider2D outro)
+    {
+        if (outro.gameObject.CompareTag("esqueleto"))
+        {
+            liberaAtaque = true;
+            
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D outro)
+    {
+        if (outro.gameObject.CompareTag("esqueleto"))
+        {
+            liberaAtaque = false;
+
+        }
+    }
+
+
+
+
+
 
     public void Pular()
     {
@@ -109,12 +148,34 @@ public class MoveNinja : MonoBehaviour
             animacao.SetBool("idle", false);
             animacao.SetBool("jump", true);
         }
+        
     }
 
     public void Atacar()
     {
         animacao.SetBool("idle", false);
         animacao.SetBool("atk", true);
+        atacando = true;
+
+        if (liberaAtaque == true)
+        {
+            
+            contadorAtaque++;
+            
+
+        }
+        else
+        {
+            atacando = false;
+        }
+
+
+    }
+
+    public void ReceberDano()
+    {
+        
+        
     }
 
 
