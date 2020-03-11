@@ -4,8 +4,8 @@ using UnityEngine;
 using Fungus;
 
 
-    public class ControleCena : MonoBehaviour
-    {
+public class ControleCena : MonoBehaviour
+{
 
 
         public Flowchart fungus;
@@ -26,7 +26,15 @@ using Fungus;
                 {
                     UiElementos[i].SetActive(false);
                 }
-            ;
+                    fungus.ExecuteBlock("Start");
+                    execUmaVez++;
+            }
+            else if(fungus.IsActive() == false)
+            {
+                for (int i = 0; i < UiElementos.Length; i++)
+                {
+                    UiElementos[i].SetActive(true);
+                }
             }
         }
-    }
+ }
