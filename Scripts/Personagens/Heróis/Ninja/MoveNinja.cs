@@ -46,6 +46,7 @@ public class MoveNinja : MonoBehaviour
             escala = heroiT.localScale;
             Mover();
             liberaPulo = Physics2D.OverlapCircle(check.position, raio, chao);
+            atacando = false;
         }
     }
 

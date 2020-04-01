@@ -6,19 +6,12 @@ using Fungus;
 
 public class ControleCena : MonoBehaviour
 {
-
-
         public Flowchart fungus;
+        public bool liberarJogo = false;
         public GameObject[] UiElementos;
         public int execUmaVez = 0;
         // Start is called before the first frame update
         void Start()
-        {
-
-        }
-
-        // Update is called once per frame
-        void Update()
         {
             if (execUmaVez == 0)
             {
@@ -29,12 +22,20 @@ public class ControleCena : MonoBehaviour
                     fungus.ExecuteBlock("Start");
                     execUmaVez++;
             }
-            else if(fungus.IsActive() == false)
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        if (!fungus.HasExecutingBlocks())
+        {
+            for (int i = 0; i < UiElementos.Length; i++)
             {
-                for (int i = 0; i < UiElementos.Length; i++)
-                {
-                    UiElementos[i].SetActive(true);
-                }
+                UiElementos[i].SetActive(true);
+                print("Entrou");
+                liberarJogo = true;
             }
         }
- }
+    }
+}
+ 

@@ -24,6 +24,8 @@ public class MoveEsqueleto : MonoBehaviour
     public bool liberaAtaque = false;
 
     public int qtd = 0;
+
+    
     void Start()
     {
         animacao = GetComponent<Animator>();
@@ -35,8 +37,9 @@ public class MoveEsqueleto : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        bool liberaVilao = heroi.GetComponent<ControleCena>().liberarJogo;
         
-        if (vivo == true)
+        if (vivo == true && liberaVilao == true)
         {
             distancia = Vector2.Distance(this.transform.position, heroi.transform.position);
             ReceberDano();
